@@ -42,7 +42,7 @@ namespace Task3
 
             foreach(StringBuilder str in FakeUsers)
             {
-                Console.WriteLine(str);
+                //Console.WriteLine(str);
                 ErrorGen error = new ErrorGen(str, locale);
                 error.RandError(averageErrors);
                 Console.WriteLine(str);
@@ -52,7 +52,12 @@ namespace Task3
         private static void ParseArgs(string[] args, out int rows, out double averageErrors, out string locale)
         {
             rows = Int32.Parse(args[1]);
-            averageErrors = Double.Parse(args[2], CultureInfo.InvariantCulture);
+            if(args.Length > 2)
+            {
+                averageErrors = Double.Parse(args[2], CultureInfo.InvariantCulture);
+            }
+            else averageErrors = 0.0;
+
             switch (args[0])
             {
                 case "en_US":
