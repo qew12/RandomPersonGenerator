@@ -13,7 +13,7 @@ namespace Task3
         
         static void Main(string[] args)
         {
-            Randomizer.Seed = new Random(1338);
+            Randomizer.Seed = new Random();
 
             int rows = 0;
             double averageErrors = 0.0;
@@ -42,7 +42,6 @@ namespace Task3
 
             foreach(StringBuilder str in FakeUsers)
             {
-                //Console.WriteLine(str);
                 ErrorGen error = new ErrorGen(str, locale);
                 error.RandError(averageErrors);
                 Console.WriteLine(str);
@@ -51,10 +50,15 @@ namespace Task3
         }
         private static void ParseArgs(string[] args, out int rows, out double averageErrors, out string locale)
         {
+            if(args.Length < 2)
+            {
+                throw new ArgumentException("Unavailable number of parameters");
+            }
             rows = Int32.Parse(args[1]);
             if(args.Length > 2)
             {
                 averageErrors = Double.Parse(args[2], CultureInfo.InvariantCulture);
+                if(averageErrors < 0.0) averageErrors = 0.0;
             }
             else averageErrors = 0.0;
 
