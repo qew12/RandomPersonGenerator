@@ -15,7 +15,7 @@ namespace Task3
         {
             Randomizer.Seed = new Random();
 
-            int rows = 0;
+            uint rows = 0;
             double averageErrors = 0.0;
             string locale = "";
             
@@ -29,7 +29,7 @@ namespace Task3
                 return;
             }
 
-            List<StringBuilder> FakeUsers = new List<StringBuilder>(rows);
+            List<StringBuilder> FakeUsers = new List<StringBuilder>((int)rows);
             UserGenerator.SetLocale(locale);
             Faker<TableUser> generator = UserGenerator.GetInstace();
             
@@ -48,13 +48,13 @@ namespace Task3
             } 
               
         }
-        private static void ParseArgs(string[] args, out int rows, out double averageErrors, out string locale)
+        private static void ParseArgs(string[] args, out uint rows, out double averageErrors, out string locale)
         {
             if(args.Length < 2)
             {
                 throw new ArgumentException("Unavailable number of parameters");
             }
-            rows = Int32.Parse(args[1]);
+            rows = uint.Parse(args[1]);
             if(args.Length > 2)
             {
                 averageErrors = Double.Parse(args[2], CultureInfo.InvariantCulture);
